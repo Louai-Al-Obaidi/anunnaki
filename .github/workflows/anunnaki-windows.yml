@@ -17,5 +17,9 @@ jobs:
       - run: pyinstaller --noconfirm --clean --distpath dist --workpath build packages/doc2markdown_desktop/packaging/Doc2MarkdownDesktop.spec
       - uses: actions/upload-artifact@v4
         with:
-          name: Anunnaki-windows
+          name: Anunnaki-Windows-x64-exe
+          path: dist/Anunnaki.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Anunnaki-Windows-x64-portable
           path: dist/Anunnaki/

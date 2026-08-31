@@ -2,6 +2,11 @@
 
 All notable changes to this project are documented here.
 
+## [0.1.1] - 2026-08-31
+
+- Made the Anunnaki logo explicit in the Windows taskbar and application title bar.
+- Simplified the end-user release path around a self-contained Windows executable with no separate Python installation.
+
 ## [0.1.0] - 2026-08-31
 
 - First independent Anunnaki desktop release, based on Microsoft MarkItDown.
