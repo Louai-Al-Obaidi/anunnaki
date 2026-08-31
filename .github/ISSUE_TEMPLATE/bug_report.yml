@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a reproducible problem in Anunnaki.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not attach private or confidential documents. Describe the structure using a sanitized sample instead."
+  - type: input
+    id: version
+    attributes:
+      label: Anunnaki version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open Anunnaki\n2. Add a sanitized file\n3. Click Convert queue"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and error text
+    validations:
+      required: true

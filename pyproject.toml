@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anunnaki"
+version = "0.1.0"
+description = "A local Windows desktop file-to-Markdown converter"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Louai Al Obaidi" }]
+dependencies = [
+  "PySide6>=6.7,<7",
+  "markitdown[all]>=0.1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pre-commit>=3.7", "pyinstaller>=6.10", "pytest>=8.2", "ruff>=0.6"]
+
+[project.scripts]
+anunnaki = "doc2markdown_desktop.app:main"
+
+[tool.setuptools]
+package-dir = { "" = "packages" }
+
+[tool.setuptools.packages.find]
+where = ["packages"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["packages"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["packages", "tests"]
+exclude = ["markitdown-main"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
