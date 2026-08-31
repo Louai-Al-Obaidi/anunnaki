@@ -2,7 +2,7 @@
 
 ## Installation
 
-**No Python installation is required.** Download `Anunnaki-v0.1.1-Windows-x64.exe` from the GitHub Release and run it. The portable executable bundles the Python runtime and required application dependencies.
+**No Python installation is required.** Download `Anunnaki.exe` from the GitHub Release and run it. The portable executable bundles the Python runtime and required application dependencies.
 
 ## Changes
 

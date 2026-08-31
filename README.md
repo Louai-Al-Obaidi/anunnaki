@@ -19,7 +19,7 @@ Anunnaki is an independent open-source project based on [Microsoft MarkItDown](h
 ### Windows — recommended for most users
 
 1. Open the [latest release](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest).
-2. Download **`Anunnaki-v0.1.1-Windows-x64.exe`**.
+2. Download **`Anunnaki.exe`**.
 3. Double-click the downloaded file and use the application.
 
 **That’s it. No separate Python installation is required.** The release EXE bundles the Python runtime and required application dependencies. No installer, command line, pip, Git, Docker, or virtual environment is needed for ordinary use.
