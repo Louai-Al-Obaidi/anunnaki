@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here.
 
+## [0.1.2] - 2026-09-01
+
+- Bundled Magika's file-identification model in Windows builds, fixing the
+  `model dir not found` conversion error.
+- Made the portable one-folder Windows package the preferred user download for
+  faster startup.
+- Moved the desktop application to the standard `src/` layout and consolidated
+  project documentation and GitHub Actions workflows.
+
 ## [0.1.1] - 2026-08-31
 
 - Made the Anunnaki logo explicit in the Windows taskbar and application title bar.

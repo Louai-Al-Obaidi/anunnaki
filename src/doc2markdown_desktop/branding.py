@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 APP_NAME = "Anunnaki"
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 
 def resource_path(*parts: str) -> Path:
