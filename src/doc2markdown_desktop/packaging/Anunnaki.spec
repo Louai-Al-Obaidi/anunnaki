@@ -9,9 +9,6 @@ project_root = Path(SPECPATH).parents[2]
 icon_path = project_root / "src" / "doc2markdown_desktop" / "assets" / "anunnaki.ico"
 logo_path = project_root / "src" / "doc2markdown_desktop" / "assets" / "logo.png"
 markitdown_datas, markitdown_binaries, markitdown_hiddenimports = collect_all("markitdown")
-# MarkItDown uses Magika to identify files. Magika loads its ONNX model and
-# JSON configuration from paths beside its Python package, so these data files
-# must be collected explicitly for frozen builds.
 magika_datas, magika_binaries, magika_hiddenimports = collect_all("magika")
 datas = markitdown_datas + magika_datas
 binaries = markitdown_binaries + magika_binaries

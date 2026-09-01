@@ -5,8 +5,11 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+from .version import __version__
+
 APP_NAME = "Anunnaki"
-__version__ = "0.1.2"
+
+__all__ = ["APP_NAME", "__version__"]
 
 
 def resource_path(*parts: str) -> Path:
