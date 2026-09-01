@@ -1,81 +1,88 @@
 # Anunnaki
 
-> A local Windows desktop app for converting documents into Markdown.
+> **MarkItDown Desktop for Windows** — convert PDF, Word, Excel, PowerPoint, and other supported documents to Markdown with drag and drop.
 
-> **Windows users: no Python installation is required.**
->
-> Download the latest portable Windows package from GitHub Releases, extract it,
-> and run `Anunnaki.exe`.
-
-[![Download latest Windows release](https://img.shields.io/badge/Download-Windows%20EXE-0078D4?logo=windows&logoColor=white)](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest)
-
-Anunnaki is an independent open-source project based on [Microsoft MarkItDown](https://github.com/microsoft/markitdown). It adds a polished desktop interface and a portable Windows executable so normal users can convert documents without a command line, Python, pip, Git, Docker, or development tools.
+[![Windows](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows&logoColor=white)](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest)
+[![Latest release](https://img.shields.io/github/v/release/Louai-Al-Obaidi/anunnaki?label=release)](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest)
+[![Tests](https://github.com/Louai-Al-Obaidi/anunnaki/actions/workflows/tests.yml/badge.svg)](https://github.com/Louai-Al-Obaidi/anunnaki/actions/workflows/tests.yml)
+[![License](https://img.shields.io/github/license/Louai-Al-Obaidi/anunnaki)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](CONTRIBUTING.md)
+[![Powered by MarkItDown](https://img.shields.io/badge/powered%20by-Microsoft%20MarkItDown-5E5E5E)](https://github.com/microsoft/markitdown)
 
 <p align="center">
   <img src="src/doc2markdown_desktop/assets/logo.png" width="180" alt="Anunnaki logo">
 </p>
 
-## Download
+## Download for Windows
 
-### Windows — recommended for most users
+**Normal users only need the release download.** You do not need Python, Docker, Git, or a command line.
 
-1. Open the [latest release](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest).
+1. Open the [latest Anunnaki release](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest).
 2. Download **`Anunnaki-Windows-x64-portable.zip`**.
-3. Extract the ZIP, then double-click **`Anunnaki.exe`** in the extracted folder.
+3. Extract the ZIP completely.
+4. Run **`Anunnaki.exe`** from the extracted `Anunnaki` folder.
 
-**That’s it. No separate Python installation is required.** The portable build
-starts faster than the optional single-file EXE because it does not need to
-unpack its bundled runtime on every launch. No installer, command line, pip,
-Git, Docker, or virtual environment is needed for ordinary use.
+The ZIP is the recommended portable Windows application. Keep `Anunnaki.exe` beside its `_internal` folder. The optional standalone EXE is also published for convenience but can start more slowly because it unpacks its runtime at launch.
 
-## For Users
+## What it does
 
-Use the graphical interface to drop files, choose an output location, and convert them to Markdown. By default, Anunnaki writes `report.md` next to `report.pdf`; the **Save next to each source file** checkbox makes that choice explicit. A shared output folder is also available.
+Anunnaki is a friendly Windows GUI around [Microsoft MarkItDown](https://github.com/microsoft/markitdown). It makes local document conversion accessible through drag and drop, batch queues, progress reporting, cancellation, and safe output-file handling.
 
-The release is a portable, self-contained Windows executable. If Windows SmartScreen displays a warning for an unsigned open-source application, review the publisher and release page before choosing whether to run it.
+- No Python, Docker, or CLI required for release users
+- Drag-and-drop and multi-file conversion queue
+- PDF to Markdown, Word/DOCX to Markdown, Excel/XLSX to Markdown, and PowerPoint/PPTX to Markdown
+- Also supports text, CSV, HTML, Markdown, images, and other formats provided by the bundled MarkItDown version
+- Existing Markdown files can be overwritten, skipped, or safely auto-renamed
+- Portable Windows build; no account or Anunnaki cloud backend required
 
-## Features
+## Why Anunnaki?
 
-- Drag-and-drop and multi-file selection
-- Background conversion queue with progress, per-file errors, and cancellation
-- Safe existing-file choices: overwrite, skip, or auto-rename
-- Local-first document handling—Anunnaki does not upload selected files by default
-- PDF, DOCX, PPTX, XLSX, CSV, HTML/HTM, TXT, Markdown, supported images, and other formats available in the bundled MarkItDown version
+Anunnaki complements MarkItDown; it does not replace it. MarkItDown remains the conversion engine, while Anunnaki focuses on a convenient Windows desktop workflow.
 
-## How It Works
+| Microsoft MarkItDown | Anunnaki |
+| --- | --- |
+| Developer-oriented Python and CLI workflows | Friendly Windows GUI |
+| Environment setup normally needed for source use | Portable release for ordinary users |
+| Terminal commands | Drag and drop and file picker |
+| Flexible conversion engine | Batch conversion queue and output controls |
 
-```mermaid
-flowchart LR
-    A[Select or drop files] --> B[Anunnaki desktop UI]
-    B --> C[Background conversion worker]
-    C --> D[Microsoft MarkItDown]
-    D --> E[Markdown files on local disk]
-```
+## Privacy and local processing
 
-## Source Code
+The Anunnaki GUI sends no selected document content to an Anunnaki service: selected files are passed to the locally installed MarkItDown conversion engine and Markdown is written to your chosen local folder. The application has no account system, Anunnaki cloud backend, or Anunnaki telemetry code.
 
-The source files in this repository are primarily for developers and contributors. They are public so anyone can inspect the application, audit its behavior, contribute improvements, or build a custom version.
+Some optional MarkItDown integrations and third-party dependencies may use external services if they are explicitly configured or invoked. Review their documentation and configuration before enabling them with sensitive content.
 
-If you only want to use Anunnaki, you do **not** need to clone the repository or configure these files—download the Windows EXE above.
-
-## Project Structure
+## How it works
 
 ```text
-src/doc2markdown_desktop/  Anunnaki GUI, worker, assets, and PyInstaller spec
-tests/                      Automated validation and output-path tests
-docs/                       Project guidance and release notes
-.github/                    CI, Windows build workflow, and community templates
-artifacts/windows/          Local generated Windows packages (not committed)
-local/                      Private local working materials (not committed)
+Documents
+    ↓
+Anunnaki GUI (PySide6)
+    ↓
+Microsoft MarkItDown conversion engine
+    ↓
+Markdown output on local disk
 ```
 
-## For Developers
+PySide6 provides the Windows interface, Anunnaki manages the conversion queue and safe output behavior, MarkItDown performs conversion, and PyInstaller packages the Windows release.
 
-**This section is only for people who want to modify or rebuild Anunnaki. Normal users should download the pre-built EXE.**
+## Screenshots and demo
 
-### Developer setup
+Real media is intentionally not fabricated. Add a screenshot at [`docs/assets/anunnaki-screenshot.png`](docs/assets/README.md) and, optionally, a demo at `docs/assets/anunnaki-demo.gif`.
 
-Python 3.11+ is required only for source development.
+## Verify a download
+
+Every release includes `SHA256SUMS.txt`. In PowerShell, run the following from the downloaded release folder:
+
+```powershell
+Get-FileHash .\Anunnaki-Windows-x64.exe -Algorithm SHA256
+```
+
+Compare the result with the matching filename in `SHA256SUMS.txt` from the same GitHub Release. Releases are currently unsigned, so Microsoft Defender SmartScreen may warn before a reputation has been established; download only from the official Releases page and verify the checksum.
+
+## For developers and contributors
+
+The source exists for transparency, auditing, and contributions. Release users do not need to build it.
 
 ```powershell
 git clone https://github.com/Louai-Al-Obaidi/anunnaki.git
@@ -87,7 +94,7 @@ pip install -e ".[dev]"
 anunnaki
 ```
 
-### Checks
+Run checks:
 
 ```powershell
 ruff check src/doc2markdown_desktop tests
@@ -95,34 +102,18 @@ ruff format --check src/doc2markdown_desktop tests
 pytest
 ```
 
-### Build the self-contained Windows EXE
+Build the portable application:
 
 ```powershell
-pyinstaller --noconfirm --clean --distpath dist --workpath build src\doc2markdown_desktop\packaging\Doc2MarkdownDesktop.spec
+pyinstaller --noconfirm --clean --distpath dist --workpath build src\doc2markdown_desktop\packaging\Anunnaki.spec
 ```
 
-The preferred release is the `dist\Anunnaki\` folder, distributed as
-`Anunnaki-Windows-x64-portable.zip`; users run `Anunnaki.exe` from the extracted
-folder. The optional `dist\Anunnaki.exe` is a convenient single-file build, but it
-starts more slowly because Windows must unpack it before the application can run.
-Neither generated output belongs in Git source control.
+Anunnaki is tested against **Microsoft MarkItDown 0.1.7**. The project uses `src/doc2markdown_desktop` internally as a controlled technical-debt name; the public product name, release assets, and packaging are Anunnaki.
 
-## Relationship to Microsoft MarkItDown
+## Versioning and releases
 
-Anunnaki is an independent derivative of Microsoft MarkItDown and is not affiliated with, endorsed by, or maintained by Microsoft. MarkItDown provides the conversion engine; Anunnaki provides the Windows desktop workflow. See [NOTICE.md](NOTICE.md) for complete attribution.
+The application version has one source of truth: [`src/doc2markdown_desktop/version.py`](src/doc2markdown_desktop/version.py). Git tags are deliberately namespaced as `anunnaki-vX.Y.Z` to avoid collisions with inherited Microsoft MarkItDown tags. Only `anunnaki-v*` tags publish releases.
 
-## Upstream Updates
+## Attribution, security, and support
 
-Review, rather than blindly merge, upstream changes:
-
-```powershell
-git fetch upstream
-git log --oneline main..upstream/main
-git switch -c chore/review-upstream upstream/main
-```
-
-## Contributing, Security, and License
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md). Anunnaki additions are copyright (c) 2026 Louai Al Obaidi. Microsoft MarkItDown retains its original copyright and MIT license; see [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md).
-
-If you find this project useful, consider giving it a ⭐. It helps more people discover the project.
+Anunnaki is an independent open-source project built around Microsoft MarkItDown. It is not affiliated with, sponsored by, or endorsed by Microsoft. Microsoft-origin material remains subject to the MIT license and notices; Anunnaki-specific additions are maintained by Louai Al Obaidi. See [NOTICE.md](NOTICE.md), [LICENSE](LICENSE), [SECURITY.md](SECURITY.md), [CONTRIBUTING.md](CONTRIBUTING.md), and [ROADMAP.md](ROADMAP.md).
