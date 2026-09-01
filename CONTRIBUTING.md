@@ -21,7 +21,7 @@ pyinstaller --noconfirm --clean --distpath dist --workpath build src\doc2markdow
 Before opening a pull request, run:
 
 ```powershell
-ruff check src tests
+ruff check .
 ruff format --check src tests
 pytest
 pre-commit run --all-files

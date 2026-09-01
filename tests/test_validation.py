@@ -3,7 +3,6 @@
 from pathlib import Path
 
 import pytest
-
 from doc2markdown_desktop.validation import (
     OutputPolicy,
     ValidationError,

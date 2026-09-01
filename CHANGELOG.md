@@ -4,6 +4,8 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-09-01
+
 ### Added
 
 - Namespaced release tags (`anunnaki-vX.Y.Z`) and a Windows release workflow

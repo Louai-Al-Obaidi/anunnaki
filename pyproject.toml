@@ -37,8 +37,8 @@ pythonpath = ["src", "packages"]
 [tool.ruff]
 target-version = "py311"
 line-length = 100
-src = ["src", "packages", "tests"]
-exclude = ["markitdown-main"]
+src = ["src/doc2markdown_desktop", "tests"]
+extend-exclude = ["packages", "markitdown-main"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]

@@ -28,11 +28,28 @@ jobs:
           }
       - name: Lint and test
         run: |
-          ruff check src/doc2markdown_desktop tests
+          ruff check .
           ruff format --check src/doc2markdown_desktop tests
           pytest
       - name: Build portable application
         run: pyinstaller --noconfirm --clean --distpath dist --workpath build src/doc2markdown_desktop/packaging/Anunnaki.spec
+      - name: Verify build outputs
+        shell: pwsh
+        run: |
+          $required = @(
+            'dist/Anunnaki.exe',
+            'dist/Anunnaki',
+            'dist/Anunnaki/_internal',
+            'dist/Anunnaki/_internal/magika/models/standard_v3_3/model.onnx'
+          )
+          foreach ($path in $required) {
+            if (-not (Test-Path -LiteralPath $path)) {
+              throw "Expected build output is missing: $path"
+            }
+          }
+          if ((Get-Item -LiteralPath 'dist/Anunnaki.exe').Length -le 0) {
+            throw 'Anunnaki.exe is empty.'
+          }
       - name: Prepare release assets and checksums
         shell: pwsh
         run: |
@@ -42,6 +59,21 @@ jobs:
           Get-ChildItem release -File | Get-FileHash -Algorithm SHA256 |
             ForEach-Object { "{0} *{1}" -f $_.Hash, $_.Path.Substring((Resolve-Path release).Path.Length + 1) } |
             Set-Content -Encoding ascii release/SHA256SUMS.txt
+          if ((Get-Item -LiteralPath 'release/Anunnaki-Windows-x64-portable.zip').Length -le 0) {
+            throw 'Portable ZIP is empty.'
+          }
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $archive = [System.IO.Compression.ZipFile]::OpenRead((Resolve-Path 'release/Anunnaki-Windows-x64-portable.zip'))
+          try {
+            if (-not ($archive.Entries.FullName -contains 'Anunnaki/Anunnaki.exe')) {
+              throw 'Portable ZIP does not contain Anunnaki.exe.'
+            }
+          } finally {
+            $archive.Dispose()
+          }
+          if ((Get-Content -LiteralPath release/SHA256SUMS.txt).Count -ne 2) {
+            throw 'SHA256SUMS.txt must contain exactly the two release assets.'
+          }
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:

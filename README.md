@@ -97,7 +97,7 @@ anunnaki
 Run checks:
 
 ```powershell
-ruff check src/doc2markdown_desktop tests
+ruff check .
 ruff format --check src/doc2markdown_desktop tests
 pytest
 ```
@@ -112,7 +112,7 @@ Anunnaki is tested against **Microsoft MarkItDown 0.1.7**. The project uses `src
 
 ## Versioning and releases
 
-The application version has one source of truth: [`src/doc2markdown_desktop/version.py`](src/doc2markdown_desktop/version.py). Git tags are deliberately namespaced as `anunnaki-vX.Y.Z` to avoid collisions with inherited Microsoft MarkItDown tags. Only `anunnaki-v*` tags publish releases.
+The current Anunnaki application version is **0.1.3**. It has one source of truth: [`src/doc2markdown_desktop/version.py`](src/doc2markdown_desktop/version.py). Git tags are deliberately namespaced as `anunnaki-vX.Y.Z`—for example, `anunnaki-v0.1.3`, `anunnaki-v0.2.0`, and `anunnaki-v1.0.0`—to avoid collisions with inherited Microsoft MarkItDown tags. Only `anunnaki-v*` tags publish releases; generic upstream `v*` tags in history are not Anunnaki releases.
 
 ## Attribution, security, and support
 
