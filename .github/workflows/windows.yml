@@ -3,7 +3,8 @@ name: Build Windows desktop app
 on:
   workflow_dispatch:
   push:
-    tags: ["v*"]
+    branches: [main]
+  pull_request:
 
 jobs:
   build:
@@ -14,7 +15,10 @@ jobs:
         with: { python-version: "3.11" }
       - run: python -m pip install --upgrade pip
       - run: pip install -e ".[dev]"
-      - run: pyinstaller --noconfirm --clean --distpath dist --workpath build src/doc2markdown_desktop/packaging/Doc2MarkdownDesktop.spec
+      - run: ruff check src/doc2markdown_desktop tests
+      - run: ruff format --check src/doc2markdown_desktop tests
+      - run: pytest
+      - run: pyinstaller --noconfirm --clean --distpath dist --workpath build src/doc2markdown_desktop/packaging/Anunnaki.spec
       - uses: actions/upload-artifact@v4
         with:
           name: Anunnaki-Windows-x64-exe
