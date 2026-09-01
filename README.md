@@ -4,14 +4,15 @@
 
 > **Windows users: no Python installation is required.**
 >
-> Download the latest Anunnaki Windows executable from GitHub Releases and run it.
+> Download the latest portable Windows package from GitHub Releases, extract it,
+> and run `Anunnaki.exe`.
 
 [![Download latest Windows release](https://img.shields.io/badge/Download-Windows%20EXE-0078D4?logo=windows&logoColor=white)](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest)
 
 Anunnaki is an independent open-source project based on [Microsoft MarkItDown](https://github.com/microsoft/markitdown). It adds a polished desktop interface and a portable Windows executable so normal users can convert documents without a command line, Python, pip, Git, Docker, or development tools.
 
 <p align="center">
-  <img src="packages/doc2markdown_desktop/assets/logo.png" width="180" alt="Anunnaki logo">
+  <img src="src/doc2markdown_desktop/assets/logo.png" width="180" alt="Anunnaki logo">
 </p>
 
 ## Download
@@ -19,10 +20,13 @@ Anunnaki is an independent open-source project based on [Microsoft MarkItDown](h
 ### Windows — recommended for most users
 
 1. Open the [latest release](https://github.com/Louai-Al-Obaidi/anunnaki/releases/latest).
-2. Download **`Anunnaki.exe`**.
-3. Double-click the downloaded file and use the application.
+2. Download **`Anunnaki-Windows-x64-portable.zip`**.
+3. Extract the ZIP, then double-click **`Anunnaki.exe`** in the extracted folder.
 
-**That’s it. No separate Python installation is required.** The release EXE bundles the Python runtime and required application dependencies. No installer, command line, pip, Git, Docker, or virtual environment is needed for ordinary use.
+**That’s it. No separate Python installation is required.** The portable build
+starts faster than the optional single-file EXE because it does not need to
+unpack its bundled runtime on every launch. No installer, command line, pip,
+Git, Docker, or virtual environment is needed for ordinary use.
 
 ## For Users
 
@@ -57,10 +61,12 @@ If you only want to use Anunnaki, you do **not** need to clone the repository or
 ## Project Structure
 
 ```text
-packages/doc2markdown_desktop/  Anunnaki GUI, worker, assets, and PyInstaller spec
-packages/markitdown/            Upstream Microsoft MarkItDown conversion engine
-tests/                          Anunnaki validation and output-path tests
-.github/                        CI, Windows build workflow, and community templates
+src/doc2markdown_desktop/  Anunnaki GUI, worker, assets, and PyInstaller spec
+tests/                      Automated validation and output-path tests
+docs/                       Project guidance and release notes
+.github/                    CI, Windows build workflow, and community templates
+artifacts/windows/          Local generated Windows packages (not committed)
+local/                      Private local working materials (not committed)
 ```
 
 ## For Developers
@@ -84,18 +90,22 @@ anunnaki
 ### Checks
 
 ```powershell
-ruff check packages/doc2markdown_desktop tests
-ruff format --check packages/doc2markdown_desktop tests
+ruff check src/doc2markdown_desktop tests
+ruff format --check src/doc2markdown_desktop tests
 pytest
 ```
 
 ### Build the self-contained Windows EXE
 
 ```powershell
-pyinstaller --noconfirm --clean --distpath dist --workpath build packages\doc2markdown_desktop\packaging\Doc2MarkdownDesktop.spec
+pyinstaller --noconfirm --clean --distpath dist --workpath build src\doc2markdown_desktop\packaging\Doc2MarkdownDesktop.spec
 ```
 
-The one-file release candidate is `dist\Anunnaki.exe`; it is the file intended for GitHub Releases. The optional `dist\Anunnaki\` folder is a portable one-folder build for diagnostics and advanced distribution. Neither generated output belongs in Git source control.
+The preferred release is the `dist\Anunnaki\` folder, distributed as
+`Anunnaki-Windows-x64-portable.zip`; users run `Anunnaki.exe` from the extracted
+folder. The optional `dist\Anunnaki.exe` is a convenient single-file build, but it
+starts more slowly because Windows must unpack it before the application can run.
+Neither generated output belongs in Git source control.
 
 ## Relationship to Microsoft MarkItDown
 

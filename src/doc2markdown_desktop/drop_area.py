@@ -17,12 +17,18 @@ class DropArea(QFrame):
         self.setAcceptDrops(True)
         self.setMinimumHeight(180)
         layout = QVBoxLayout(self)
-        label = QLabel(
-            "Drop files here\n<span>PDF, Office documents, spreadsheets, images, and more</span>"
-        )
-        label.setObjectName("dropLabel")
-        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(label)
+        title = QLabel("Drop files here")
+        title.setObjectName("dropTitle")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        subtitle = QLabel("PDF, Office documents, spreadsheets, images, and more")
+        subtitle.setObjectName("dropSubtitle")
+        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        layout.addStretch(1)
+        layout.addWidget(title)
+        layout.addWidget(subtitle)
+        layout.addStretch(1)
 
     def dragEnterEvent(self, event: object) -> None:  # type: ignore[override]
         mime = event.mimeData()

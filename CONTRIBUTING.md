@@ -11,8 +11,8 @@ python -m pip install -e ".[dev]"
 Before opening a pull request, run:
 
 ```powershell
-ruff check packages tests
-ruff format --check packages tests
+ruff check src tests
+ruff format --check src tests
 pytest
 pre-commit run --all-files
 ```

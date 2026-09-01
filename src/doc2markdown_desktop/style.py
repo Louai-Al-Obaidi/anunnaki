@@ -13,8 +13,8 @@ QHeaderView::section { background: #252b35; border: 0; padding: 7px; font-weight
 QTableWidget { gridline-color: #363e4b; } QTableWidget::item { padding: 5px; }
 #dropArea { background: #1d2635; border: 2px dashed #4d78c5; border-radius: 12px; }
 #dropArea:hover { background: #22304a; border-color: #73a0ff; }
-#dropLabel { font-size: 16pt; font-weight: 600; color: #e8efff; }
-#dropLabel span { font-size: 10pt; font-weight: 400; color: #aebbd0; }
+#dropTitle { font-size: 16pt; font-weight: 600; color: #e8efff; }
+#dropSubtitle { font-size: 10pt; font-weight: 400; color: #aebbd0; }
 #subtitle { color: #aeb7c5; } #message { color: #b9c6da; }
 QProgressBar { border: 1px solid #3b4555; border-radius: 5px; text-align: center;
   background: #20252e; }

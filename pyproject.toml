@@ -22,19 +22,19 @@ dev = ["pre-commit>=3.7", "pyinstaller>=6.10", "pytest>=8.2", "ruff>=0.6"]
 anunnaki = "doc2markdown_desktop.app:main"
 
 [tool.setuptools]
-package-dir = { "" = "packages" }
+package-dir = { "" = "packages", "doc2markdown_desktop" = "src/doc2markdown_desktop" }
 
 [tool.setuptools.packages.find]
-where = ["packages"]
+where = ["packages", "src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["packages"]
+pythonpath = ["src", "packages"]
 
 [tool.ruff]
 target-version = "py311"
 line-length = 100
-src = ["packages", "tests"]
+src = ["src", "packages", "tests"]
 exclude = ["markitdown-main"]
 
 [tool.ruff.lint]
